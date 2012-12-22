@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Testing jsonp</title>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <style>
+    	.sec{font: bold 15px arial, sans-serif;}
+    	td{font: bold 12px arial, sans-serif;}
+    	tr:nth-child(odd){background-color: #E1E1E1;}
+    </style>
+  </head>
+  <body>
+  	<div class="sec">Input : </div>
+  	<table>
+  		<tr>
+  		<td>Url :</td>
+  		<td><input type="text" id="url" size="150"
+  		value="http://os-script.appspot.com/rest/aglvcy1zY3JpcHRyDQsSBlNjcmlwdBihHww"/></td>
+  		</tr>
+  		<tr>
+  		<td>Input :</td>
+  		<td><input type="text" id="input" size="150"
+  		value="{}"/></td>
+  		</tr>
+  	</table>
+  	<div><input type="button" value="submit" onclick="submitForm()"/></div>
+  	<div class="sec">Output : </div>
+  	<div id="result">-- No result --
+  	</div>
+  </body>
+  <script>
+	function submitForm()
+	{
+	$.ajax({
+		url: $("#url").val(),
+		data: $.parseJSON($("#input").val()),
+		dataType: 'jsonp',
+		success: function(content) {
+			var html = "<table width='400'><tr><td>Name</td><td>Value</td></tr>";
+			for(var n in content)
+				html += "<tr><td>"+n+"</td><td>"+content[n]+"</td></tr>";
+			html += "</table>";
+			$("#result").html(html);
+		},
+		error: function(e) {
+			alert("error: "+e);
+		}
+	});
+	}
+  </script>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>ScriptServlet</servlet-name>
+		<servlet-class>com.orangescape.script.ScriptServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ScriptServlet</servlet-name>
+		<url-pattern>/soap/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditServlet</servlet-name>
+		<servlet-class>com.orangescape.script.EditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/create</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/edit/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/view/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/test/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	<security-constraint>
+	    <web-resource-collection>
+	        <url-pattern>/</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <role-name>*</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+	    <web-resource-collection>
+	        <url-pattern>/soap/*</url-pattern>
+	        <url-pattern>/rest/*</url-pattern>
+	    </web-resource-collection>
+	</security-constraint>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

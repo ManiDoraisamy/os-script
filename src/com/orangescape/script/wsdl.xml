@@ -1,0 +1,53 @@
+<definitions  xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+
+xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:orangescape"
+
+ targetNamespace="urn:orangescape" > 
+  <types> 
+  <xsd:schema elementFormDefault="qualified" targetNamespace="urn:orangescape" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:urn="urn:orangescape"> 
+      <xsd:element name="Yql"> 
+          <xsd:complexType> 
+              <xsd:sequence> 
+                      <xsd:element name="q" type="xsd:string"/> 
+                      <xsd:element name="env" type="xsd:string"/> 
+              </xsd:sequence> 
+          </xsd:complexType> 
+      </xsd:element>
+  </xsd:schema> 
+  </types> 
+ 
+  <message name="YqlRequest"> 
+    <part name="parameters" element="tns:Yql" /> 
+  </message> 
+ 
+  <message name="YqlResponse"> 
+    <part name="parameters" element="xsd:any"/> 
+  </message> 
+ 
+  <portType name="YqlServer">
+    <operation name="Submit"> 
+      <input message="tns:YqlRequest"/> 
+      <output message="tns:YqlResponse"/> 
+    </operation>
+  </portType> 
+ 
+  <binding name="YqlServer" type="tns:YqlServer"> 
+    <soap:binding style="document"
+
+                 transport="http://schemas.xmlsoap.org/soap/http"/> 
+    <operation name="Submit"> 
+      <soap:operation soapAction="Submit"/> 
+        <input> 
+          <soap:body use="literal"/> 
+        </input> 
+        <output> 
+          <soap:body use="literal"/> 
+        </output> 
+    </operation> 
+  </binding> 
+  <service name="YqlServer"> 
+    <port name="YqlServer" binding="tns:YqlServer"> 
+      <soap:address location="http://yql-ws.appspot.com/yql"/> 
+    </port> 
+  </service> 
+</definitions> 
